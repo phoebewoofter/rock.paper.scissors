@@ -11,21 +11,19 @@ function Game() {
   const choices = ["rock", "paper", "scissors"];
 
   const getComputerChoice = () => {
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
-    setComputerChoice(randomChoice);
-    return randomChoice;
+    return choices[Math.floor(Math.random() * choices.length)];
   };
 
-  const determineWinner = () => {
-    if (playerChoice === computerChoice) {
+  const determineWinner = (player, computer) => {
+    if (player === computer) {
       setResult("tie");
       return;
     }
 
     if (
-      (playerChoice === "rock" && computerChoice === "scissors") ||
-      (playerChoice === "paper" && computerChoice === "rock") ||
-      (playerChoice === "scissors" && computerChoice === "paper")
+      (player === "rock" && computer === "scissors") ||
+      (player === "paper" && computer === "rock") ||
+      (player === "scissors" && computer === "paper")
     ) {
       setResult("player");
       setPlayerScore(prev => prev + 1);
@@ -38,6 +36,7 @@ function Game() {
   const handleChoice = (choice) => {
     setPlayerChoice(choice);
     const computerSelection = getComputerChoice();
+    setComputerChoice(computerSelection);
     determineWinner(choice, computerSelection);
   };
 
@@ -50,20 +49,20 @@ function Game() {
       </h3>
       <div className="player-computer">
         <div>
-            <h4>You</h4>
-            <p>
-                {playerChoice === "rock" ? "✊" :
-                playerChoice === "paper" ? "✋" :
-                playerChoice === "scissors" ? "✌️" : ""}
-            </p>
+          <h4>You</h4>
+          <p>
+            {playerChoice === "rock" ? "✊" :
+            playerChoice === "paper" ? "✋" :
+            playerChoice === "scissors" ? "✌️" : ""}
+          </p>
         </div>
         <div>
-            <h4>Computer</h4>
-            <p>
-                {computerChoice === "rock" ? "✊" :
-                computerChoice === "paper" ? "✋" :
-                computerChoice === "scissors" ? "✌️" : ""}
-            </p>
+          <h4>Computer</h4>
+          <p>
+            {computerChoice === "rock" ? "✊" :
+            computerChoice === "paper" ? "✋" :
+            computerChoice === "scissors" ? "✌️" : ""}
+          </p>
         </div>
       </div>
       <div className="buttons">
